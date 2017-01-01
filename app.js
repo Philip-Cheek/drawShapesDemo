@@ -1,7 +1,7 @@
 window.onload = function(){
-	var game = new Game('drawCanvas', 'demoCanvas', 'run');
-	game.init();
-	game.start();
+	var sBox = new Sandbox('drawCanvas', 'demoCanvas', 'run');
+	sBox.init();
+	sBox.start();
 };
 
 window.requestAnimFrame = (function(){
@@ -13,7 +13,7 @@ window.requestAnimFrame = (function(){
           };
 })();
 
-var Game = function(drawID, demoID, demoButton, main){
+var Sandbox = function(drawID, demoID, demoButton, main){
 	var self = this;
 	this.draw = {
 		'canvas': document.getElementById(drawID),
@@ -34,7 +34,7 @@ var Game = function(drawID, demoID, demoButton, main){
 	this.click = false;
 }
 
-Game.prototype.init = function(){
+Sandbox.prototype.init = function(){
 	var self = this;
 
 	sizeCanvas(self);
@@ -63,7 +63,7 @@ Game.prototype.init = function(){
 }
 
 
-Game.prototype.drawBox = function(){
+Sandbox.prototype.drawBox = function(){
 	var c = [this.draw, this.demo],
 		b = [this.body, this.demoBody];
 
@@ -85,7 +85,7 @@ Game.prototype.drawBox = function(){
 	}
 }
 
-Game.prototype.start = function(){
+Sandbox.prototype.start = function(){
 	var self = this;
 
 	function animate(){
@@ -97,16 +97,16 @@ Game.prototype.start = function(){
 	animate();
 }
 
-Game.prototype.clear = function(){
+Sandbox.prototype.clear = function(){
 	var c = [this.draw, this.demo];
 	for (var i = 0; i < c.length; i++){
 		c[i].context.clearRect(0,0,c[i].canvas.width, c[i].canvas.height);
 	}
 }
 
-Game.prototype.drawDemo = function(){
+Sandbox.prototype.drawDemo = function(){
 	this.demoBody = [];
-	
+
 	for (var i = 0; i < this.body.length; i++){
 		this.demoBody.push(this.body[i]);
 	}
